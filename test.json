@@ -1,0 +1,225 @@
+{
+    "id": "AttNoneg-D5-743",
+    "maxD": 5,
+    "NFact": 10,
+    "NRule": 7,
+    "triples": {
+        "triple1": {
+            "text": "Anne is green.",
+            "representation": "(\"Anne\" \"is\" \"green\" \"+\")"
+        },
+        "triple2": {
+            "text": "Anne is smart.",
+            "representation": "(\"Anne\" \"is\" \"smart\" \"+\")"
+        },
+        "triple3": {
+            "text": "Anne is young.",
+            "representation": "(\"Anne\" \"is\" \"young\" \"+\")"
+        },
+        "triple4": {
+            "text": "Dave is big.",
+            "representation": "(\"Dave\" \"is\" \"big\" \"+\")"
+        },
+        "triple5": {
+            "text": "Dave is young.",
+            "representation": "(\"Dave\" \"is\" \"young\" \"+\")"
+        },
+        "triple6": {
+            "text": "Gary is green.",
+            "representation": "(\"Gary\" \"is\" \"green\" \"+\")"
+        },
+        "triple7": {
+            "text": "Gary is kind.",
+            "representation": "(\"Gary\" \"is\" \"kind\" \"+\")"
+        },
+        "triple8": {
+            "text": "Gary is round.",
+            "representation": "(\"Gary\" \"is\" \"round\" \"+\")"
+        },
+        "triple9": {
+            "text": "Gary is young.",
+            "representation": "(\"Gary\" \"is\" \"young\" \"+\")"
+        },
+        "triple10": {
+            "text": "Harry is smart.",
+            "representation": "(\"Harry\" \"is\" \"smart\" \"+\")"
+        }
+    },
+    "rules": {
+        "rule1": {
+            "text": "All smart, green things are round.",
+            "representation": "(((\"something\" \"is\" \"smart\" \"+\") (\"something\" \"is\" \"green\" \"+\")) -> (\"something\" \"is\" \"round\" \"+\"))"
+        },
+        "rule2": {
+            "text": "If something is smart then it is kind.",
+            "representation": "(((\"something\" \"is\" \"smart\" \"+\")) -> (\"something\" \"is\" \"kind\" \"+\"))"
+        },
+        "rule3": {
+            "text": "All smart, green things are white.",
+            "representation": "(((\"something\" \"is\" \"smart\" \"+\") (\"something\" \"is\" \"green\" \"+\")) -> (\"something\" \"is\" \"white\" \"+\"))"
+        },
+        "rule4": {
+            "text": "All white things are big.",
+            "representation": "(((\"something\" \"is\" \"white\" \"+\")) -> (\"something\" \"is\" \"big\" \"+\"))"
+        },
+        "rule5": {
+            "text": "If Dave is white and Dave is young then Dave is green.",
+            "representation": "(((\"Dave\" \"is\" \"white\" \"+\") (\"Dave\" \"is\" \"young\" \"+\")) -> (\"Dave\" \"is\" \"green\" \"+\"))"
+        },
+        "rule6": {
+            "text": "All kind, young things are white.",
+            "representation": "(((\"something\" \"is\" \"kind\" \"+\") (\"something\" \"is\" \"young\" \"+\")) -> (\"something\" \"is\" \"white\" \"+\"))"
+        },
+        "rule7": {
+            "text": "All young things are smart.",
+            "representation": "(((\"something\" \"is\" \"young\" \"+\")) -> (\"something\" \"is\" \"smart\" \"+\"))"
+        }
+    },
+    "questions": {
+        "Q1": {
+            "question": "Gary is green.",
+            "answer": true,
+            "QDep": 0,
+            "QLen": 1,
+            "strategy": "proof",
+            "proofs": "[(triple6)]",
+            "representation": "(\"Gary\" \"is\" \"green\" \"+\")"
+        },
+        "Q2": {
+            "question": "Dave is not young.",
+            "answer": false,
+            "QDep": 0,
+            "QLen": 1,
+            "strategy": "inv-proof",
+            "proofs": "[(triple5)]",
+            "representation": "(\"Dave\" \"is\" \"young\" \"-\")"
+        },
+        "Q3": {
+            "question": "Dave is smart.",
+            "answer": true,
+            "QDep": 1,
+            "QLen": 2,
+            "strategy": "proof",
+            "proofs": "[(((triple5) -> rule7))]",
+            "representation": "(\"Dave\" \"is\" \"smart\" \"+\")"
+        },
+        "Q4": {
+            "question": "Dave is not smart.",
+            "answer": false,
+            "QDep": 1,
+            "QLen": 2,
+            "strategy": "inv-proof",
+            "proofs": "[(((triple5) -> rule7))]",
+            "representation": "(\"Dave\" \"is\" \"smart\" \"-\")"
+        },
+        "Q5": {
+            "question": "Gary is big.",
+            "answer": true,
+            "QDep": 2,
+            "QLen": 4,
+            "strategy": "proof",
+            "proofs": "[(((((((triple9) -> rule7) triple6) -> rule3)) -> rule4) OR ((((((((triple9) -> rule7)) -> rule2) triple9) -> rule6)) -> rule4) OR ((((triple7 triple9) -> rule6)) -> rule4))]",
+            "representation": "(\"Gary\" \"is\" \"big\" \"+\")"
+        },
+        "Q6": {
+            "question": "Gary is not big.",
+            "answer": false,
+            "QDep": 2,
+            "QLen": 4,
+            "strategy": "inv-proof",
+            "proofs": "[(((((((triple9) -> rule7) triple6) -> rule3)) -> rule4) OR ((((((((triple9) -> rule7)) -> rule2) triple9) -> rule6)) -> rule4) OR ((((triple7 triple9) -> rule6)) -> rule4))]",
+            "representation": "(\"Gary\" \"is\" \"big\" \"-\")"
+        },
+        "Q7": {
+            "question": "Dave is white.",
+            "answer": true,
+            "QDep": 3,
+            "QLen": 5,
+            "strategy": "proof",
+            "proofs": "[(((((((triple5) -> rule7)) -> rule2) triple5) -> rule6))]",
+            "representation": "(\"Dave\" \"is\" \"white\" \"+\")"
+        },
+        "Q8": {
+            "question": "Dave is not white.",
+            "answer": false,
+            "QDep": 3,
+            "QLen": 5,
+            "strategy": "inv-proof",
+            "proofs": "[(((((((triple5) -> rule7)) -> rule2) triple5) -> rule6))]",
+            "representation": "(\"Dave\" \"is\" \"white\" \"-\")"
+        },
+        "Q9": {
+            "question": "Dave is green.",
+            "answer": true,
+            "QDep": 4,
+            "QLen": 7,
+            "strategy": "proof",
+            "proofs": "[(((((((((triple5) -> rule7)) -> rule2) triple5) -> rule6) triple5) -> rule5))]",
+            "representation": "(\"Dave\" \"is\" \"green\" \"+\")"
+        },
+        "Q10": {
+            "question": "Dave is not green.",
+            "answer": false,
+            "QDep": 4,
+            "QLen": 7,
+            "strategy": "inv-proof",
+            "proofs": "[(((((((((triple5) -> rule7)) -> rule2) triple5) -> rule6) triple5) -> rule5))]",
+            "representation": "(\"Dave\" \"is\" \"green\" \"-\")"
+        },
+        "Q11": {
+            "question": "Dave is round.",
+            "answer": true,
+            "QDep": 5,
+            "QLen": 10,
+            "strategy": "proof",
+            "proofs": "[(((((triple5) -> rule7) ((((((((triple5) -> rule7)) -> rule2) triple5) -> rule6) triple5) -> rule5)) -> rule1))]",
+            "representation": "(\"Dave\" \"is\" \"round\" \"+\")"
+        },
+        "Q12": {
+            "question": "Dave is not round.",
+            "answer": false,
+            "QDep": 5,
+            "QLen": 10,
+            "strategy": "inv-proof",
+            "proofs": "[(((((triple5) -> rule7) ((((((((triple5) -> rule7)) -> rule2) triple5) -> rule6) triple5) -> rule5)) -> rule1))]",
+            "representation": "(\"Dave\" \"is\" \"round\" \"-\")"
+        },
+        "Q13": {
+            "question": "Harry is not round.",
+            "answer": true,
+            "QDep": 1,
+            "QLen": "",
+            "strategy": "inv-rconc",
+            "proofs": "[@1: Harry is round.[CWA. Example of deepest failure = (rule1 <- FAIL)]]",
+            "representation": "(\"Harry\" \"is\" \"round\" \"-\")"
+        },
+        "Q14": {
+            "question": "Harry is big.",
+            "answer": false,
+            "QDep": 2,
+            "QLen": "",
+            "strategy": "rconc",
+            "proofs": "[@2: Harry is big.[CWA. Example of deepest failure = (rule4 <- rule3 <- FAIL)]]",
+            "representation": "(\"Harry\" \"is\" \"big\" \"+\")"
+        },
+        "Q15": {
+            "question": "Harry is not white.",
+            "answer": true,
+            "QDep": 1,
+            "QLen": "",
+            "strategy": "inv-rconc",
+            "proofs": "[@1: Harry is white.[CWA. Example of deepest failure = (rule3 <- FAIL)]]",
+            "representation": "(\"Harry\" \"is\" \"white\" \"-\")"
+        },
+        "Q16": {
+            "question": "Harry is young.",
+            "answer": false,
+            "QDep": 0,
+            "QLen": "",
+            "strategy": "random",
+            "proofs": "[@0: Harry is young.[CWA. Example of deepest failure = (FAIL)]]",
+            "representation": "(\"Harry\" \"is\" \"young\" \"+\")"
+        }
+    },
+    "allProofs": "@0: Harry is smart.[(triple10)] Gary is young.[(triple9)] Gary is green.[(triple6)] Dave is young.[(triple5)] Anne is young.[(triple3)] Anne is green.[(triple1)] Anne is smart.[(((triple3) -> rule7) OR triple2)] Gary is round.[(((((triple9) -> rule7) triple6) -> rule1) OR triple8)] Gary is kind.[(((((triple9) -> rule7)) -> rule2) OR triple7)] Dave is big.[(((((((((triple5) -> rule7)) -> rule2) triple5) -> rule6)) -> rule4) OR triple4)] @1: Anne is round.[(((((triple3) -> rule7) triple1) -> rule1) OR ((triple2 triple1) -> rule1))] Anne is kind.[(((((triple3) -> rule7)) -> rule2) OR ((triple2) -> rule2))] Harry is kind.[(((triple10) -> rule2))] Dave is smart.[(((triple5) -> rule7))] Gary is smart.[(((triple9) -> rule7))] Gary is white.[(((((triple9) -> rule7) triple6) -> rule3) OR ((((((triple9) -> rule7)) -> rule2) triple9) -> rule6) OR ((triple7 triple9) -> rule6))] Anne is white.[(((((((triple3) -> rule7)) -> rule2) triple3) -> rule6) OR ((((triple2) -> rule2) triple3) -> rule6) OR ((((triple3) -> rule7) triple1) -> rule3) OR ((triple2 triple1) -> rule3))] @2: Dave is kind.[(((((triple5) -> rule7)) -> rule2))] Anne is big.[(((((((((triple3) -> rule7)) -> rule2) triple3) -> rule6)) -> rule4) OR ((((((triple2) -> rule2) triple3) -> rule6)) -> rule4) OR ((((((triple3) -> rule7) triple1) -> rule3)) -> rule4) OR ((((triple2 triple1) -> rule3)) -> rule4))] Gary is big.[(((((((triple9) -> rule7) triple6) -> rule3)) -> rule4) OR ((((((((triple9) -> rule7)) -> rule2) triple9) -> rule6)) -> rule4) OR ((((triple7 triple9) -> rule6)) -> rule4))] @3: Dave is white.[(((((((triple5) -> rule7)) -> rule2) triple5) -> rule6))] @4: Dave is green.[(((((((((triple5) -> rule7)) -> rule2) triple5) -> rule6) triple5) -> rule5))] @5: Dave is round.[(((((triple5) -> rule7) ((((((((triple5) -> rule7)) -> rule2) triple5) -> rule6) triple5) -> rule5)) -> rule1))]"
+}
